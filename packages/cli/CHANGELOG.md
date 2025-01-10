@@ -1,5 +1,60 @@
 # Change Log
 
+## 1.10.2
+
+### Patch Changes
+
+- [#639](https://github.com/SmartThingsCommunity/smartthings-cli/pull/639) [`e6a2394`](https://github.com/SmartThingsCommunity/smartthings-cli/commit/e6a2394cd45dbd860fef1844c32c890de4310406) Thanks [@rossiam](https://github.com/rossiam)! - Schema apps that are in review cannot be updated.
+
+## 1.10.1
+
+### Patch Changes
+
+- [#637](https://github.com/SmartThingsCommunity/smartthings-cli/pull/637) [`8d62e62`](https://github.com/SmartThingsCommunity/smartthings-cli/commit/8d62e62573b857b4582c2b1c9e1f769bf00dd00e) Thanks [@rossiam](https://github.com/rossiam)! - Force user to choose organization for schema app before doing anything that will automatically assign one.
+
+## 1.10.0
+
+### Minor Changes
+
+- [#619](https://github.com/SmartThingsCommunity/smartthings-cli/pull/619) [`032a231`](https://github.com/SmartThingsCommunity/smartthings-cli/commit/032a2317825c55a063ec02171cbd4178314092f4) Thanks [@rossiam](https://github.com/rossiam)! - query user for organization in schema:update and schema:create commands
+
+### Patch Changes
+
+- [#622](https://github.com/SmartThingsCommunity/smartthings-cli/pull/622) [`b99e397`](https://github.com/SmartThingsCommunity/smartthings-cli/commit/b99e3976ec87f241e0b2b800b36fa1b331f5a7a8) Thanks [@rossiam](https://github.com/rossiam)! - fix error when running invites:schema that could happen if user has a schema app without an organization
+
+- Updated dependencies [[`b99e397`](https://github.com/SmartThingsCommunity/smartthings-cli/commit/b99e3976ec87f241e0b2b800b36fa1b331f5a7a8), [`032a231`](https://github.com/SmartThingsCommunity/smartthings-cli/commit/032a2317825c55a063ec02171cbd4178314092f4)]:
+  - @smartthings/plugin-cli-edge@3.3.4
+  - @smartthings/cli-lib@2.3.0
+
+## 1.9.1
+
+### Patch Changes
+
+- [#615](https://github.com/SmartThingsCommunity/smartthings-cli/pull/615) [`146c66f`](https://github.com/SmartThingsCommunity/smartthings-cli/commit/146c66f98931cfcf714d9579e46eec4b57b1b66a) Thanks [@bflorian](https://github.com/bflorian)! - Allow port number in callback URLs of API_ONLY apps.
+
+- Updated dependencies [[`146c66f`](https://github.com/SmartThingsCommunity/smartthings-cli/commit/146c66f98931cfcf714d9579e46eec4b57b1b66a)]:
+  - @smartthings/cli-lib@2.2.5
+
+## 1.9.0
+
+### Minor Changes
+
+- [#612](https://github.com/SmartThingsCommunity/smartthings-cli/pull/612) [`77976d2`](https://github.com/SmartThingsCommunity/smartthings-cli/commit/77976d2389daad278048c66d2c231428c4faabd9) Thanks [@rossiam](https://github.com/rossiam)! - add support for listing Schema apps by organization
+
+## 1.8.2
+
+### Patch Changes
+
+- [#566](https://github.com/SmartThingsCommunity/smartthings-cli/pull/566) [`fdf4250`](https://github.com/SmartThingsCommunity/smartthings-cli/commit/fdf425001643484283baa83abd662ce7f6e63372) Thanks [@rossiam](https://github.com/rossiam)! - handle epoch timestamps for history, honor `after` flag strictly in JSON and YAML output
+
+- [#581](https://github.com/SmartThingsCommunity/smartthings-cli/pull/581) [`a9d6398`](https://github.com/SmartThingsCommunity/smartthings-cli/commit/a9d6398634236462a232f94d2ec3f2b5ab1fe4fc) Thanks [@rossiam](https://github.com/rossiam)! - bump core SDK version
+
+- [#607](https://github.com/SmartThingsCommunity/smartthings-cli/pull/607) [`b82345d`](https://github.com/SmartThingsCommunity/smartthings-cli/commit/b82345da6bdf03d0e43510c9ab24d5f752a5203e) Thanks [@rossiam](https://github.com/rossiam)! - fixed bug preventing editing of webhook URLs in Schema apps
+
+- Updated dependencies [[`a9d6398`](https://github.com/SmartThingsCommunity/smartthings-cli/commit/a9d6398634236462a232f94d2ec3f2b5ab1fe4fc)]:
+  - @smartthings/plugin-cli-edge@3.3.3
+  - @smartthings/cli-lib@2.2.4
+
 ## 1.8.1
 
 ### Patch Changes

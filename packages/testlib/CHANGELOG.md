@@ -1,5 +1,23 @@
 # Change Log
 
+## 2.0.7
+
+### Patch Changes
+
+- [#622](https://github.com/SmartThingsCommunity/smartthings-cli/pull/622) [`b99e397`](https://github.com/SmartThingsCommunity/smartthings-cli/commit/b99e3976ec87f241e0b2b800b36fa1b331f5a7a8) Thanks [@rossiam](https://github.com/rossiam)! - fix error when running invites:schema that could happen if user has a schema app without an organization
+
+- Updated dependencies [[`b99e397`](https://github.com/SmartThingsCommunity/smartthings-cli/commit/b99e3976ec87f241e0b2b800b36fa1b331f5a7a8), [`032a231`](https://github.com/SmartThingsCommunity/smartthings-cli/commit/032a2317825c55a063ec02171cbd4178314092f4)]:
+  - @smartthings/cli-lib@2.3.0
+
+## 2.0.6
+
+### Patch Changes
+
+- [#581](https://github.com/SmartThingsCommunity/smartthings-cli/pull/581) [`a9d6398`](https://github.com/SmartThingsCommunity/smartthings-cli/commit/a9d6398634236462a232f94d2ec3f2b5ab1fe4fc) Thanks [@rossiam](https://github.com/rossiam)! - bump core SDK version
+
+- Updated dependencies [[`a9d6398`](https://github.com/SmartThingsCommunity/smartthings-cli/commit/a9d6398634236462a232f94d2ec3f2b5ab1fe4fc)]:
+  - @smartthings/cli-lib@2.2.4
+
 ## 2.0.5
 
 ### Patch Changes

@@ -2,10 +2,21 @@ import { Flags, Errors } from '@oclif/core'
 
 import { SchemaApp, SchemaAppRequest } from '@smartthings/core-sdk'
 
-import { APIOrganizationCommand, inputItem, selectFromList, lambdaAuthFlags, SelectFromListConfig, userInputProcessor } from '@smartthings/cli-lib'
+import {
+	APIOrganizationCommand,
+	inputItem,
+	selectFromList,
+	lambdaAuthFlags,
+	SelectFromListConfig,
+	userInputProcessor,
+} from '@smartthings/cli-lib'
 
 import { addSchemaPermission } from '../../lib/aws-utils'
-import { getSchemaAppUpdateFromUser } from '../../lib/commands/schema-util'
+import {
+	getSchemaAppEnsuringOrganization,
+	getSchemaAppUpdateFromUser,
+	SchemaAppWithOrganization,
+} from '../../lib/commands/schema-util'
 
 
 export default class SchemaUpdateCommand extends APIOrganizationCommand<typeof SchemaUpdateCommand.flags> {
@@ -42,12 +53,24 @@ export default class SchemaUpdateCommand extends APIOrganizationCommand<typeof S
 			listItems: () => this.client.schema.list(),
 		})
 
+		const { schemaApp: original, organizationWasUpdated } =
+			await getSchemaAppEnsuringOrganization(this, id, this.flags)
+		if (original.certificationStatus === 'wwst' ||
+				original.certificationStatus === 'cst' ||
+				original.certificationStatus === 'review') {
+			const cancelMsgBase =
+				'Schema apps that have already been certified cannot be updated via the CLI'
+			const cancelMsg = organizationWasUpdated
+				? cancelMsgBase + ' so further updates are not possible.'
+				: cancelMsgBase + '.'
+			this.cancel(cancelMsg)
+		}
+
 		const getInputFromUser = async (): Promise<SchemaAppRequest> => {
-			const original = await this.client.schema.get(id)
 			return getSchemaAppUpdateFromUser(this, original, this.flags['dry-run'])
 		}
 
-		const [request] = await inputItem<SchemaAppRequest>(this, userInputProcessor(getInputFromUser))
+		const [request] = await inputItem<SchemaAppWithOrganization>(this, userInputProcessor(getInputFromUser))
 		if (this.flags.authorize) {
 			if (request.hostingType === 'lambda') {
 				if (request.lambdaArn) {
@@ -66,7 +89,8 @@ export default class SchemaUpdateCommand extends APIOrganizationCommand<typeof S
 				throw Error('Authorization is not applicable to WebHook schema connectors')
 			}
 		}
-		const result = await this.client.schema.update(id, request)
+		const { organizationId, ...data } = request
+		const result = await this.client.schema.update(id, data, organizationId)
 		if (result.status !== 'success') {
 			throw new Errors.CLIError(`error ${result.status} updating ${id}`)
 		}

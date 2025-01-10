@@ -1,10 +1,17 @@
-import { inputItem, IOFormat, selectFromList } from '@smartthings/cli-lib'
 import { SchemaApp, SchemaAppRequest, SchemaEndpoint } from '@smartthings/core-sdk'
-import { addSchemaPermission } from '../../../lib/aws-utils'
+
+import { inputItem, IOFormat, selectFromList } from '@smartthings/cli-lib'
+
 import SchemaUpdateCommand from '../../../commands/schema/update'
+import { addSchemaPermission } from '../../../lib/aws-utils'
+import {
+	getSchemaAppEnsuringOrganization,
+	SchemaAppWithOrganization,
+} from '../../../lib/commands/schema-util'
 
 
 jest.mock('../../../lib/aws-utils')
+jest.mock('../../../lib/commands/schema-util')
 
 
 describe('SchemaUpdateCommand', () => {
@@ -12,10 +19,16 @@ describe('SchemaUpdateCommand', () => {
 	const listSpy = jest.spyOn(SchemaEndpoint.prototype, 'list')
 	const logSpy = jest.spyOn(SchemaUpdateCommand.prototype, 'log').mockImplementation()
 
-	const schemaAppRequest = { appName: 'schemaApp' } as SchemaAppRequest
-	const inputItemMock = jest.mocked(inputItem).mockResolvedValue([schemaAppRequest, IOFormat.JSON])
+	const schemaAppRequest = { appName: 'schemaApp' } as SchemaApp
+	const schemaAppRequestWithOrganization = {
+		...schemaAppRequest,
+		organizationId: 'organization-id',
+	} as SchemaAppWithOrganization
+	const inputItemMock = jest.mocked(inputItem).mockResolvedValue([schemaAppRequestWithOrganization, IOFormat.JSON])
 	const addSchemaPermissionMock = jest.mocked(addSchemaPermission)
 	const selectFromListMock = jest.mocked(selectFromList).mockResolvedValue('schemaAppId')
+	const getSchemaAppMock = jest.mocked(getSchemaAppEnsuringOrganization)
+		.mockResolvedValue({ schemaApp: schemaAppRequest, organizationWasUpdated: false })
 
 	it('prompts user to select schema app', async () => {
 		const schemaAppList = [{ appName: 'schemaApp' } as SchemaApp]
@@ -34,6 +47,12 @@ describe('SchemaUpdateCommand', () => {
 				preselectedId: 'schemaAppId',
 				listItems: expect.any(Function),
 			}),
+		)
+		expect(getSchemaAppMock).toHaveBeenCalledTimes(1)
+		expect(getSchemaAppMock).toHaveBeenCalledWith(
+			expect.any(SchemaUpdateCommand),
+			'schemaAppId',
+			{ profile: 'default' },
 		)
 
 		const listFunction = selectFromListMock.mock.calls[0][2].listItems
@@ -54,7 +73,7 @@ describe('SchemaUpdateCommand', () => {
 	it('calls correct update endpoint', async () => {
 		await expect(SchemaUpdateCommand.run([])).resolves.not.toThrow()
 
-		expect(updateSpy).toBeCalledWith('schemaAppId', schemaAppRequest)
+		expect(updateSpy).toBeCalledWith('schemaAppId', schemaAppRequest, 'organization-id')
 	})
 
 	it('logs to stdout when updated', async () => {
@@ -107,6 +126,6 @@ describe('SchemaUpdateCommand', () => {
 		await expect(SchemaUpdateCommand.run(['--authorize'])).resolves.not.toThrow()
 
 		expect(addSchemaPermissionMock).toBeCalledTimes(0)
-		expect(updateSpy).toBeCalledWith('schemaAppId', noArnSchemaRequest)
+		expect(updateSpy).toBeCalledWith('schemaAppId', noArnSchemaRequest, undefined)
 	})
 })

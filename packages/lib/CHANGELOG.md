@@ -1,5 +1,27 @@
 # Change Log
 
+## 2.3.0
+
+### Minor Changes
+
+- [#619](https://github.com/SmartThingsCommunity/smartthings-cli/pull/619) [`032a231`](https://github.com/SmartThingsCommunity/smartthings-cli/commit/032a2317825c55a063ec02171cbd4178314092f4) Thanks [@rossiam](https://github.com/rossiam)! - query user for organization in schema:update and schema:create commands
+
+### Patch Changes
+
+- [#622](https://github.com/SmartThingsCommunity/smartthings-cli/pull/622) [`b99e397`](https://github.com/SmartThingsCommunity/smartthings-cli/commit/b99e3976ec87f241e0b2b800b36fa1b331f5a7a8) Thanks [@rossiam](https://github.com/rossiam)! - fix error when running invites:schema that could happen if user has a schema app without an organization
+
+## 2.2.5
+
+### Patch Changes
+
+- [#615](https://github.com/SmartThingsCommunity/smartthings-cli/pull/615) [`146c66f`](https://github.com/SmartThingsCommunity/smartthings-cli/commit/146c66f98931cfcf714d9579e46eec4b57b1b66a) Thanks [@bflorian](https://github.com/bflorian)! - Allow port number in callback URLs of API_ONLY apps.
+
+## 2.2.4
+
+### Patch Changes
+
+- [#581](https://github.com/SmartThingsCommunity/smartthings-cli/pull/581) [`a9d6398`](https://github.com/SmartThingsCommunity/smartthings-cli/commit/a9d6398634236462a232f94d2ec3f2b5ab1fe4fc) Thanks [@rossiam](https://github.com/rossiam)! - bump core SDK version
+
 ## 2.2.3
 
 ### Patch Changes

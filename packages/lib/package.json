@@ -1,6 +1,6 @@
 {
 	"name": "@smartthings/cli-lib",
-	"version": "2.2.3",
+	"version": "2.3.0",
 	"description": "SmartThings CLI utility library",
 	"author": "Samsung Electronics Co., LTD.",
 	"bugs": {
@@ -30,12 +30,12 @@
 	"dependencies": {
 		"@log4js-node/log4js-api": "^1.0.2",
 		"@oclif/core": "^1.16.3",
-		"@smartthings/core-sdk": "^8.1.1",
+		"@smartthings/core-sdk": "^8.3.1",
 		"@types/eventsource": "^1.1.9",
-		"axios": "^0.27.2",
+		"axios": "^0.28.0",
 		"chalk": "^4.1.2",
 		"eventsource": "^2.0.2",
-		"express": "^4.18.1",
+		"express": "^4.20.0",
 		"get-port": "^5.1.1",
 		"inquirer": "^8.2.4",
 		"js-yaml": "^4.1.0",
